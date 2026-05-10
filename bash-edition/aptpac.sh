@@ -39,11 +39,11 @@ function help() {
 	echo "	remove - uninstall a package."
 	echo "	purge - uninstall a package along with its configuration files. in debian (apt): 'apt purge'."
 	echo "	search - search a package."
-	echo "	find - (paru -F) in debian: 'apt-file search'."
+	echo "	find - (pacman -F) in debian: 'apt-file search'."
 	echo "	update - equivalent of 'apt update' in debian."
 	echo "	upgrade - equivalent of 'apt upgrade' in debian."
 	echo "	full-upgrade - update + upgrade.."
-	echo "	autoclean - clean up paru caches."
+	echo "	autoclean - clean up pacman caches."
 	echo "	clean - same as 'autoclean'."
 	echo "	autoremove - remove packages that are no longer needed."
 	echo "	show - show the information of a package that is installed."
@@ -60,7 +60,7 @@ function help() {
 function about() {
 	echo "      APTPAC      "
 	echo "  ==============  "
-	echo "A simple wrapper for paru with a syntax similar to apt to help people transitioning to Arch and Arch based distros like Manjaro."
+	echo "A simple wrapper for pacman with a syntax similar to apt to help people transitioning to Arch and Arch based distros like Manjaro."
 	echo -e "Version: $appver\n"
 	echo "License: MIT"
 	echo "Copyright (c) 2021 Itai Nelken"
@@ -160,107 +160,107 @@ while [[ "$1" != '' ]]; do
 		install)
 			shift
 			if [[ "$LEARN" == 1 ]]; then
-				echo -e "The command being run is: \e[1mparu -S \"$@\"\e[0m"
+				echo -e "The command being run is: \e[1msudo pacman -S \"$@\"\e[0m"
 			fi
-			paru -S "$@"
+			sudo pacman -S "$@"
 			break
 		;;
 		install-local)
 			shift
 			if [[ "$LEARN" == 1 ]]; then
-				echo -e "The command being run is \e[1mparu -U \"$@\"\e[0m"
+				echo -e "The command being run is \e[1msudo pacman -U \"$@\"\e[0m"
 			fi
-			paru -U "$@"
+			sudo pacman -U "$@"
 			break
 		;;
 		remove)
 			shift
 			if [[ "$LEARN" == 1 ]]; then
-				echo -e "The command being run is: \e[1mparu -Rs \"$@\"\e[0m"
+				echo -e "The command being run is: \e[1msudo pacman -Rs \"$@\"\e[0m"
 			fi
-			paru -Rs "$@"
+			sudo pacman -Rs "$@"
 			break
 		;;
 		purge)
 			shift
 			if [[ "$LEARN" == 1 ]]; then
-				echo -e "The command being run is: \e[1mparu -Rn \"$@\"\e[0m"
+				echo -e "The command being run is: \e[1msudo pacman -Rn \"$@\"\e[0m"
 			fi
-			paru -Rn "$@"
+			sudo pacman -Rn "$@"
 			break
 		;;
 		search)
 			shift
 			if [[ "$LEARN" == 1 ]]; then
-				echo -e "The command being run is: \e[1mparu -Ss \"$@\"\e[0m"
+				echo -e "The command being run is: \e[1mpacman -Ss \"$@\"\e[0m"
 			fi
-			paru -Ss "$@"
+			pacman -Ss "$@"
 			break
 		;;
 		find)
 			shift
 			if [[ "$LEARN" == 1 ]]; then
-				echo -e "The command being run is: \e[1mparu -F \"$@\"\e[0m"
+				echo -e "The command being run is: \e[1mpacman -F \"$@\"\e[0m"
 			fi
-			paru -F "$@"
+			pacman -F "$@"
 			break
 		;;
 		update)
 			if [[ $LEARN == 1 ]]; then
-				echo -e "The command being run is: \e[1mparu -Sy\e[0m"
+				echo -e "The command being run is: \e[1msudo pacman -Sy\e[0m"
 			fi
-			paru -Sy
+			sudo pacman -Sy
 			break
 		;;
 		upgrade)
 			if [[ "$LEARN" == 1 ]]; then
-				echo -e "The command being run is: \e[1mparu -Su\e[0m"
+				echo -e "The command being run is: \e[1msudo pacman -Su\e[0m"
 			fi
-			paru -Su
+			sudo pacman -Su
 			break
 		;;
 		full-upgrade)
 			if [[ "$LEARN" == 1 ]]; then
-				echo -e "The command being run is: \e[1mparu -Syu\e[0m"
+				echo -e "The command being run is: \e[1msudo pacman -Syu\e[0m"
 			fi
-			paru -Syu
+			sudo pacman -Syu
 			break
 		;;
 		autoclean|clean)
 			if [[ "$LEARN" == 1 ]]; then
-				echo -e "The command being run is: \e[1mparu -Scc\e[0m"
+				echo -e "The command being run is: \e[1msudo pacman -Scc\e[0m"
 			fi
-			paru -Scc
+			sudo pacman -Scc
 			break
 		;;
 		autoremove)
 			if [[ "$LEARN" == 1 ]]; then
-				echo -e "The command being run is: \e[1mparu -Qdtq | paru -Rs - \"$@\"\e[0m"
+				echo -e "The command being run is: \e[1msudo pacman -Qdtq | sudo pacman -Rs - \"$@\"\e[0m"
 			fi
-			paru -Qdtq | paru -Rs -
+			sudo pacman -Qdtq | sudo pacman -Rs -
 			break
 		;;
 		list-installed)
 			if [[ "$LEARN" == 1 ]]; then
-				echo -e "The command being run is: \e[1mparu -Qqe\e[0m"
+				echo -e "The command being run is: \e[1msudo pacman -Qqe\e[0m"
 			fi
-			paru -Qqe
+			pacman -Qqe
 			break
 		;;
 		show)
 			shift
 			if [[ "$LEARN" == 1 ]]; then
-				echo -e "The command being run is: \e[1mparu -Qi \"$@\"\e[0m"
+				echo -e "The command being run is: \e[1msudo pacman -Qi \"$@\"\e[0m"
 			fi
-			paru -Qi "$@"
+			pacman -Qi "$@"
 			break
 		;;
 		show-all)
 			shift
 			if [[ "$LEARN" == 1 ]]; then
-				echo -e "The command being run is: \e[1mparu -Si \"$@\"\e[0m"
+				echo -e "The command being run is: \e[1msudo pacman -Si \"$@\"\e[0m"
 			fi
-			paru -Si "$@"
+			pacman -Si "$@"
 			break
 		;;
 		help|-h|--help|-help)
