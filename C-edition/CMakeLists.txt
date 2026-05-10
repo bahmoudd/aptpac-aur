@@ -1,6 +1,13 @@
 cmake_minimum_required(VERSION 3.16)
 set(CMAKE_C_COMPILER "gcc")
 project(aptpac VERSION 3.1 LANGUAGES C)
+find_program(PARU_EXECUTABLE paru)
+
+if(NOT PARU_EXECUTABLE)
+	message(FATAL_ERROR "paru was not found")
+endif()
+
+message(STATUS "Found paru: ${PARU_EXECUTABLE}")
 
 #set some variables
 set(BIN "aptpac") #the name of the executable
@@ -53,6 +60,10 @@ set(CPACK_PACKAGE_VERSION ${CMAKE_PROJECT_VERSION})
 #set(CPACK_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}_Linux-${TARGET_ARCH}")
 set(CPACK_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}_Linux-${CMAKE_HOST_SYSTEM_PROCESSOR}")
 include(CPack)
+
+target_compile_definitions(aptpac PRIVATE
+	PARU_PATH="${PARU_EXECUTABLE}"
+)
 
 #install target
 install(
