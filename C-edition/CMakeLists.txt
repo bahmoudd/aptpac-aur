@@ -1,14 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 set(CMAKE_C_COMPILER "gcc")
 project(aptpac VERSION 3.1 LANGUAGES C)
-find_program(PARU_EXECUTABLE paru)
-find_program(PACMAN_EXECUTABLE pacman)
-
-if(NOT PARU_EXECUTABLE)
-	message(STATUS "paru was not found, using pacman instead at ${PACMAN_EXECUTABLE}")
-else()
-  message(STATUS "Found paru: ${PARU_EXECUTABLE}")
-endif()
 
 #set some variables
 set(BIN "aptpac") #the name of the executable
